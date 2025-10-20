@@ -1,0 +1,712 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Prodigy Tech Hub — Insights</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ======== RESET ======== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #f8f9fb;
+      color: #222;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    /* ======== HEADER ======== */
+    .header {
+      background: #fff;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      animation: fadeDown 0.6s ease;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: #0056ff;
+      transition: color 0.3s;
+    }
+
+    .logo:hover {
+      color: #222;
+    }
+
+    .nav a {
+      margin: 0 1rem;
+      color: #555;
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      left: 0;
+      bottom: -4px;
+      background: #0056ff;
+      transition: width 0.3s ease;
+    }
+
+    .nav a:hover {
+      color: #0056ff;
+    }
+
+    .nav a:hover::after {
+      width: 100%;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .section h1 {
+      font-size: 2rem;
+      color: #111;
+      margin-top: 2rem;
+    }
+
+    .lead {
+      font-size: 1rem;
+      color: #555;
+      margin-top: 0.6rem;
+      margin-bottom: 2rem;
+    }
+
+    /* ===== FEATURED ARTICLE ===== */
+    .featured-article {
+      display: flex;
+      flex-wrap: wrap;
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      margin-bottom: 3rem;
+      animation: fadeUp 1s ease;
+    }
+.details-section {
+  padding: 4rem 0;
+  margin-top: 2rem;
+  border-top: 1px solid #eaeaea;
+  animation: fadeIn 0.8s ease;
+}
+
+.details-section h2 {
+  font-size: 1.8rem;
+  color: #0a2540;
+  margin-bottom: 1rem;
+}
+
+.details-section p {
+  color: #555;
+  line-height: 1.7;
+  max-width: 800px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+    .featured-img {
+      width: 100%;
+      max-width: 500px;
+      object-fit: cover;
+    }
+
+    .featured-content {
+      flex: 1;
+      padding: 2rem;
+    }
+
+    .featured-content h2 {
+      color: #0056ff;
+      margin-bottom: 1rem;
+    }
+
+    .featured-content p {
+      color: #555;
+      margin-bottom: 1rem;
+    }
+
+    .read-more {
+      color: #0056ff;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .read-more:hover {
+      color: #003fcc;
+    }
+.insight-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+
+.card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 18px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.6rem;
+  color: #0a2540;
+}
+
+.card .lead {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+.btn {
+  background: linear-gradient(135deg, #0078ff, #00c6ff);
+  border: none;
+  padding: 0.7rem 1.3rem;
+  color: #fff;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+  background: linear-gradient(135deg, #005ecb, #0096ff);
+  transform: scale(1.05);
+}
+
+.btn.read-more::after {
+  content: " →";
+  transition: margin-left 0.3s;
+}
+
+.btn.read-more:hover::after {
+  margin-left: 6px;
+}
+.card {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+    /* ===== EVENTS SECTION ===== */
+    .events-section {
+      margin-top: 5rem;
+      text-align: left;
+    }
+
+    .events-section h2 {
+      color: #111;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .event-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .event-card {
+      background: linear-gradient(135deg, #f1f5ff, #ffffff);
+      border-radius: 16px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      padding: 2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .event-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .btn-register {
+      display: inline-block;
+      margin-top: 1rem;
+      background: #0056ff;
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .btn-register:hover {
+      background: #003fcc;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: #111;
+      color: #fff;
+      padding: 2rem 0;
+      text-align: center;
+      font-size: 0.95rem;
+      margin-top: 4rem;
+    }
+
+    /* ===== CHATBOT ===== */
+    .chat-toggle {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #0056ff;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease;
+      z-index: 1000;
+    }
+
+    .chat-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    .chat-window {
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      width: 320px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      animation: fadeUp 0.4s ease;
+    }
+
+    .chat-header {
+      background: #0056ff;
+      color: #fff;
+      padding: 1rem;
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    .chat-body {
+      padding: 1rem;
+      height: 200px;
+      overflow-y: auto;
+      font-size: 0.9rem;
+      color: #444;
+    }
+
+    .chat-input-wrap {
+      display: flex;
+      border-top: 1px solid #eee;
+    }
+
+    .chat-input {
+      flex: 1;
+      padding: 0.8rem;
+      border: none;
+      outline: none;
+      font-size: 0.9rem;
+    }
+
+    .chat-send {
+      background: #0056ff;
+      color: #fff;
+      border: none;
+      padding: 0 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .chat-send:hover {
+      background: #0042cc;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .featured-article {
+        flex-direction: column;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner container">
+      <a class="logo" href="Home.html">Prodigy Tech Hub</a>
+      <nav class="nav">
+        <a href="history.html">History</a>
+        <a href="training.html">Training</a>
+        <a href="courses.html">Courses</a>
+        <a href="insight.html" class="active">Insight</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="sections">
+
+  <!-- Curriculum -->
+  <section id="curriculum" class="curriculum active">
+    <div class="curriculum-text">
+      <h2>Hands-On Learning, Real-World Projects</h2>
+      <p>
+        At <strong>Prodigy Tech Hub</strong>, learning goes beyond theory — it’s about creating, building,
+        and solving real-world problems. Every program is designed to put your knowledge into action
+        through hands-on projects, peer collaboration, and direct mentorship from experienced industry professionals.
+      </p>
+
+      <p>
+        You’ll master essential skills across <strong>Software Engineering</strong>, <strong>UI/UX Design</strong>,
+        <strong>Cybersecurity</strong>, and <strong>Artificial Intelligence</strong> using the same tools,
+        workflows, and technologies used by global innovators.
+      </p>
+
+      <p>
+        From your first project to your final deployment, we help you think like an engineer, design like a creator,
+        and grow like a leader — preparing you not just for a career, but for a future in shaping the world of tech.
+      </p>
+    </div>
+
+    <div class="curriculum-image">
+      <strong>Innovate with Purpose</strong>
+      <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=500&q=80"
+        alt="Prodigy Tech Students Working">
+    </div>
+  </section>
+
+  <!-- Faculty -->
+  <section id="faculty" class="faculty">
+    <div class="faculty-text">
+      <h2>Learn from Industry Experts</h2>
+      <p>
+        Our mentors are tech professionals and entrepreneurs who bring years of industry experience to guide you through your journey.
+      </p>
+    </div>
+
+    <div class="faculty-photos">
+      <div class="faculty-photo">
+        <img src="Resources/Assets/ima/1.jpg" alt="Mentor 1 - Alex Johnson">
+        <div class="mentor-info">
+          <h4>Alex Johnson</h4>
+          <p>Lead Software Engineer</p>
+        </div>
+      </div>
+
+      <div class="faculty-photo">
+        <img src="Resources/Assets/ima/2.jpg" alt="Mentor 2 - Sarah Lee">
+        <div class="mentor-info">
+          <h4>Sarah Lee</h4>
+          <p>UI/UX Design Specialist</p>
+        </div>
+      </div>
+
+      <div class="faculty-photo">
+        <img src="Resources/Assets/ima/3.jpg" alt="Mentor 3 - David Kim">
+        <div class="mentor-info">
+          <h4>David Kim</h4>
+          <p>AI & Data Science Mentor</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Specializations -->
+  <section id="specializations" class="specializations">
+    <div class="specializations-text">
+      <h2>Focus Areas of Innovation</h2>
+      <p>
+        At <strong>Prodigy Tech Hub</strong>, innovation is not just a concept — it’s our culture. 
+        We believe in transforming creativity into tangible solutions that shape the digital world. 
+      </p>
+      <p>
+        Whether you’re passionate about <strong>Artificial Intelligence</strong>, driven by <strong>Cybersecurity</strong>,
+        excited by <strong>Full-Stack Development</strong>, or inspired by <strong>UI/UX Design</strong>, 
+        our specialized programs are designed to equip you with the skills and experience to stand out globally.
+      </p>
+      <p>
+        Explore, experiment, and evolve — build technologies that solve real problems and define the next generation of innovation.
+      </p>
+    </div>
+
+    <div class="specializations-gallery">
+      <div class="focus-card">
+        <img src="Resources/Assets/ima/11.jpg" alt="AI & Machine Learning">
+        <span>Artificial Intelligence</span>
+      </div>
+
+      <div class="focus-card">
+        <img src="Resources/Assets/ima/10.jpg" alt="Cybersecurity & Ethical Hacking">
+        <span>Cybersecurity</span>
+      </div>
+
+      <div class="focus-card">
+        <img src="Resources/Assets/ima/12.jpg" alt="Full Stack Web Development">
+        <span>Full Stack Development</span>
+      </div>
+
+      <div class="focus-card">
+        <img src="Resources/Assets/ima/9.jpg" alt="UI/UX & Product Design">
+        <span>UI/UX Design</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Insights Section -->
+  <section class="section container insights-section" id="insights">
+    <h1>Insights</h1>
+    <p class="lead">Articles, tutorials, and event updates from Prodigy.</p>
+
+    <div class="insight-grid">
+      <div class="card">
+        <h3>Tech News</h3>
+        <p class="lead">Curated industry updates from around the world.</p>
+        <button class="btn read-more" onclick="scrollToSection('tech-news')">Read More</button>
+      </div>
+
+      <div class="card">
+        <h3>Tutorials</h3>
+        <p class="lead">Step-by-step guides, coding lessons, and walkthroughs for tech learners.</p>
+        <button class="btn read-more" onclick="scrollToSection('tutorials')">Start Learning</button>
+      </div>
+
+      <div class="card">
+        <h3>Workshops</h3>
+        <p class="lead">Join upcoming bootcamps, webinars, and hands-on tech events.</p>
+        <button class="btn read-more" onclick="scrollToSection('workshops')">View Schedule</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Target Sections -->
+  <section class="details-section container" id="tech-news">
+    <h2>Latest in Tech News</h2>
+    <p>Explore our curated list of innovations, startup breakthroughs, and product launches making waves in the tech world.</p>
+  </section>
+
+  <section class="details-section container" id="tutorials">
+    <h2>Developer Tutorials</h2>
+    <p>From HTML & CSS to AI development — follow our in-depth tutorials to grow your career in tech.</p>
+  </section>
+
+  <section class="details-section container" id="workshops">
+    <h2>Workshops & Events</h2>
+    <p>See our upcoming bootcamps, webinars, and networking sessions hosted by Prodigy Tech Hub.</p>
+  </section>
+
+</main>
+
+
+      </div>
+
+      <div class="events-section">
+        <h2>Upcoming Events</h2>
+        <div class="event-grid">
+          <div class="event-card">
+            <h3>Frontend Masterclass</h3>
+            <p>Learn advanced React and Tailwind from industry experts. <br><strong>Date:</strong> Oct 25, 2025</p>
+            <a href="#" class="btn-register">Register Now</a>
+          </div>
+
+          <div class="event-card">
+            <h3>Data Analysis Bootcamp</h3>
+            <p>4-week deep dive into Excel, Power BI, and SQL with real projects. <br><strong>Starts:</strong> Nov 5, 2025</p>
+            <a href="#" class="btn-register">Join Waitlist</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <strong>Prodigy Tech Hub</strong> © 2025 — Empowering Tech Minds
+    </div>
+  </footer>
+
+  <button class="chat-toggle" aria-label="Open chat">💬</button>
+  <div class="chat-window" role="dialog" aria-label="ProdigyBot">
+    <div class="chat-header">ProdigyBot</div>
+    <div class="chat-body"></div>
+    <div class="chat-input-wrap">
+      <input class="chat-input" placeholder="Ask about courses or events..." />
+      <button class="chat-send" type="button">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const chatToggle = document.querySelector(".chat-toggle");
+    const chatWindow = document.querySelector(".chat-window");
+    const chatSend = document.querySelector(".chat-send");
+    const chatBody = document.querySelector(".chat-body");
+    const chatInput = document.querySelector(".chat-input");
+
+    chatToggle.addEventListener("click", () => {
+      chatWindow.style.display =
+        chatWindow.style.display === "flex" ? "none" : "flex";
+    });
+
+    chatSend.addEventListener("click", () => {
+      const message = chatInput.value.trim();
+      if (!message) return;
+
+      const userMsg = document.createElement("div");
+      userMsg.textContent = "👤 " + message;
+      chatBody.appendChild(userMsg);
+
+      chatInput.value = "";
+      chatBody.scrollTop = chatBody.scrollHeight;
+
+      setTimeout(() => {
+        const botMsg = document.createElement("div");
+        botMsg.textContent = "🤖 Thanks for asking! We'll get back with info soon.";
+        chatBody.appendChild(botMsg);
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }, 800);
+    });
+    // Animate cards when they come into view
+  const cards = document.querySelectorAll('.card');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+        observer.unobserve(entry.target); // Optional: triggers animation only once
+      }
+    });
+  }, {
+    threshold: 0.2 // triggers when 20% of the card is visible
+  });
+   // Smooth scroll to section
+  function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+
+  cards.forEach(card => observer.observe(card));
+   // === Smooth Scroll to Section ===
+  function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      // Add highlight effect
+      section.classList.add("active-section");
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+
+      // Remove highlight after 2 seconds
+      setTimeout(() => {
+        section.classList.remove("active-section");
+      }, 2000);
+    }
+  }
+
+  // === Card Entrance Animation ===
+  const cards = document.querySelectorAll(".card");
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  cards.forEach((card, index) => {
+    observer.observe(card);
+    card.style.transitionDelay = `${index * 0.15}s`; // delay for cascade effect
+  });
+
+  // === Button Ripple Animation ===
+  const buttons = document.querySelectorAll(".btn");
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", function (e) {
+      const ripple = document.createElement("span");
+      ripple.classList.add("ripple");
+      this.appendChild(ripple);
+
+      const rect = this.getBoundingClientRect();
+      ripple.style.left = `${e.clientX - rect.left}px`;
+      ripple.style.top = `${e.clientY - rect.top}px`;
+
+      setTimeout(() => ripple.remove(), 600);
+    });
+  });
+
+</script>
+
+ 
+</body>
+</html>

@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Prodigy Tech Hub — Contact</title>
+
+  <!-- Leaflet Map Styles -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+
+  <style>
+    :root {
+      --accent: #0066ff;
+      --accent-2: #4f46e5;
+      --text: #1a1f2b;
+      --muted: #6b7280;
+      --bg: #f5f7fb;
+      --card: #fff;
+      --shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      --radius: 12px;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    .header {
+      background: var(--card);
+      box-shadow: var(--shadow);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--accent-2);
+      text-decoration: none;
+    }
+
+    .nav a {
+      margin-left: 1rem;
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--text);
+      transition: color 0.3s;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      color: var(--accent);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 1rem;
+      animation: fadeIn 1.2s ease forwards;
+    }
+
+    .intro {
+      text-align: center;
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0.5rem auto 2rem;
+    }
+
+    .contact-wrap {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-form {
+      flex: 1;
+      min-width: 300px;
+      background: var(--card);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      animation: slideUp 1.2s ease;
+    }
+
+    .field {
+      margin-bottom: 1.2rem;
+    }
+
+    .field label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .input,
+    textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border-radius: var(--radius);
+      border: 1px solid #ccc;
+      font-family: inherit;
+      transition: border 0.3s, box-shadow 0.3s;
+    }
+
+    .input:focus,
+    textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 8px rgba(0, 102, 255, 0.2);
+      outline: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 0.9rem 1.8rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-2);
+      transform: scale(1.05);
+    }
+
+    .contact-info {
+      flex: 1;
+      min-width: 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--card);
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+#map {
+  width: 100%;
+  height: 400px;
+  border-radius: 12px;
+  margin-top: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.map-section {
+  margin-top: 40px;
+  padding: 24px;
+  background: #fafafa;
+  border-radius: 12px;
+}
+
+.map-section h2 {
+  font-size: 1.8rem;
+  color: #222;
+  margin-bottom: 12px;
+}
+
+    .footer {
+      text-align: center;
+      padding: 1.2rem;
+      background: var(--card);
+      margin-top: 3rem;
+      color: var(--muted);
+      box-shadow: var(--shadow);
+    }
+
+    /* Chatbot */
+    .chat-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease;
+    }
+
+    .chat-toggle:hover {
+      transform: scale(1.1);
+      background: var(--accent-2);
+    }
+
+    .chat-window {
+      display: none;
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      width: 320px;
+      height: 420px;
+      overflow: hidden;
+      flex-direction: column;
+    }
+
+    .chat-header {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.8rem 1rem;
+      font-weight: 600;
+    }
+
+    .chat-body {
+      flex: 1;
+      padding: 1rem;
+      overflow-y: auto;
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    .chat-input-wrap {
+      display: flex;
+      border-top: 1px solid #eee;
+    }
+
+    .chat-input {
+      flex: 1;
+      border: none;
+      padding: 0.7rem;
+      outline: none;
+    }
+
+    .chat-send {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 0.7rem 1rem;
+      cursor: pointer;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .contact-wrap {
+        flex-direction: column;
+      }
+      #map {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- header section container -->
+  <header class="header">
+    <div class="header-inner">
+      <a class="logo" href="Home.html">Prodigy Tech Hub</a>
+      <nav class="nav">
+        <a href="history.html">History</a>
+        <a href="training.html">Training</a>
+        <a href="courses.html">Courses</a>
+        <a href="insight.html">Insight</a>
+        <a href="contact.html" class="active">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- the contact form info section container -->
+  <main>
+    <section class="section fade-in">
+      <h1>Contact Us</h1>
+      <p class="intro">We’d love to hear from you! Get in touch for partnerships, training, or inquiries.</p>
+
+      <div class="contact-wrap">
+        <form class="contact-form" id="contactForm">
+              <div class="field">
+                <label>Name</label>
+                <input class="input" type="text" name="name" id="userName" required />
+              </div>
+              <div class="field">
+                <label>Email</label>
+                <input class="input" type="email" name="email" id="userEmail" required />
+              </div>
+              <div class="field">
+                <label>Message</label>
+                <textarea name="message" rows="6" id="userMessage" required></textarea>
+              </div>
+              <button class="btn-primary" type="submit">Send Message</button>
+        </form>
+
+        <div class="contact-info">
+          <div class="card">
+            <h3>📍 Office</h3>
+            <p class="lead">123 Tech Avenue, Lagos, Nigeria</p>
+            <h3>📧 Email</h3>
+            <p class="lead">info@prodigytechhub.com</p>
+            <h3>📰 Newsletter</h3>
+            <p class="lead">Subscribe for updates, cohort calls, and events.</p>
+          </div>
+
+          <!-- map section -->
+          <div class="map-section container">
+  <h2>Find Us</h2>
+  <div id="map">
+    <iframe
+  width="600"
+  height="450"
+  style="border:0"
+  loading="good"
+  allowfullscreen
+  referrerpolicy="no-referrer-when-downgrade"
+  src="https://www.google.com/maps/embed/v1/place?key=API_KEY
+    &q=Space+Needle,Seattle+WA">
+</iframe>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    © 2025 Prodigy Tech Hub — Empowering Future Innovators 💡
+  </footer>
+
+  <button class="chat-toggle">🤖</button>
+  <div class="chat-window">
+    <div class="chat-header">ProdigyBot</div>
+    <div class="chat-body"></div>
+    <div class="chat-input-wrap">
+      <input class="chat-input" placeholder="Ask me anything..." />
+      <button class="chat-send">Send</button>
+    </div>
+  </div>
+
+
+
+
+
+
+
+<!-- leaflet DNS link -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    // Fade-in animation
+    const fadeEls = document.querySelectorAll(".fade-in");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.style.animation = "fadeIn 1.2s ease forwards";
+      });
+    }, { threshold: 0.2 });
+    fadeEls.forEach(el => observer.observe(el));
+
+    // Contact form
+   // Listen for form submission
+  document.getElementById("contactForm").addEventListener("submit", function (event) {
+    event.preventDefault(); // prevent form reload
+
+    // Collect values
+    let userName = document.getElementById("userName").value;
+    let userEmail = document.getElementById("userEmail").value;
+    let userMessage = document.getElementById("userMessage").value;
+    let currentDate = new Date();
+
+    // Log to console (for testing)
+    console.log("Name:", userName);
+    console.log("Email:", userEmail);
+    console.log("Message:", userMessage);
+    console.log("Date:", currentDate);
+
+    // Show popup message
+    alert("✅ Thanks for reaching out to Prodigy Tech Hub! Our admin will get back to you in a giffy.");
+
+    // Optionally clear the form after submission
+    document.getElementById("contactForm").reset();
+  });
+  
+// Live Map (using Leaflet and OpenStreetMap)
+const map = L.map("map").setView([6.5244, 3.3792], 13); // Center: Lagos
+
+// Use standard OpenStreetMap tiles
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+// Add marker for Prodigy Tech Hub
+L.marker([6.5244, 3.3792]).addTo(map)
+  .bindPopup("<b>Prodigy Tech Hub HQ</b><br>123 Tech Avenue, Lagos.")
+  .openPopup();
+
+
+    // Chatbot
+    const chatToggle = document.querySelector(".chat-toggle");
+    const chatWindow = document.querySelector(".chat-window");
+    const chatBody = document.querySelector(".chat-body");
+    const chatInput = document.querySelector(".chat-input");
+    const chatSend = document.querySelector(".chat-send");
+
+    chatToggle.addEventListener("click", () => {
+      chatWindow.style.display = chatWindow.style.display === "flex" ? "none" : "flex";
+    });
+
+    chatSend.addEventListener("click", () => {
+      const msg = chatInput.value.trim();
+      if (!msg) return;
+      const userMsg = document.createElement("div");
+      userMsg.textContent = "👤 " + msg;
+      chatBody.appendChild(userMsg);
+      setTimeout(() => {
+        const botMsg = document.createElement("div");
+        botMsg.textContent = "🤖 ProdigyBot: Thanks for your message! Our team will get back to you shortly.";
+        chatBody.appendChild(botMsg);
+      }, 800);
+      chatInput.value = "";
+    });
+  </script>
+</body>
+</html>

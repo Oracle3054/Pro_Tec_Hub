@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Explore Programs — Prodigy Tech Hub</title>
+  <link rel="stylesheet" href="Resources/Styles_file/global.css" />
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg, #f9fafc);
+      color: var(--text, #0f1724);
+    }
+
+    /* === HERO === */
+    .hero {
+      background: linear-gradient(135deg, #0066ff, #00c6ff);
+      color: #fff;
+      text-align: center;
+      padding: 7rem 1rem 6rem;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      animation: slideUp 1.2s ease;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      animation: fadeIn 1.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* === PROGRAM CARDS === */
+    .programs {
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 0 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .program-card {
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .program-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    }
+
+    .program-card img {
+      width: 100%;
+      border-radius: 0.8rem;
+      height: 180px;
+      object-fit: cover;
+      margin-bottom: 1.5rem;
+    }
+
+    .program-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .program-card p {
+      color: var(--muted, #555);
+      margin-bottom: 1rem;
+    }
+
+    .program-card .btn {
+      background: var(--accent, #0066ff);
+      color: #fff;
+      border: none;
+      padding: 0.8rem 1.4rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .program-card .btn:hover {
+      background: #004fcc;
+      transform: scale(1.05);
+    }
+
+    /* === REGISTRATION SECTION === */
+    .register {
+      background: #eef4ff;
+      text-align: center;
+      padding: 5rem 1rem;
+      border-radius: 2rem;
+      margin: 5rem auto;
+      width: 90%;
+      max-width: 1000px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      animation: fadeIn 1.2s ease;
+    }
+
+    .register h2 {
+      margin-bottom: 1rem;
+    }
+
+    .register p {
+      color: var(--muted, #555);
+      margin-bottom: 2rem;
+    }
+
+    form {
+      display: grid;
+      gap: 1rem;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    input, select {
+      padding: 0.8rem;
+      border-radius: 0.5rem;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      width: 100%;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #0066ff;
+      box-shadow: 0 0 5px rgba(0,102,255,0.3);
+    }
+
+    .btn-submit {
+      background: #0066ff;
+      color: #fff;
+      padding: 0.9rem 1.5rem;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      background: #004fcc;
+    }
+
+    /* === FLOATING ENROLL BUTTON === */
+    .enroll-btn {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #0066ff;
+      color: #fff;
+      border: none;
+      padding: 1rem 1.3rem;
+      border-radius: 50%;
+      font-size: 1.4rem;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner container">
+      <a class="logo" href="home.html">Prodigy Tech Hub</a>
+      <nav class="nav">
+        <a href="history.html">History</a>
+        <a href="training.html" class="active">Programs</a>
+        <a href="courses.html">Courses</a>
+        <a href="insight.html">Insight</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Explore Our Programs</h1>
+    <p>Choose between our flexible physical and online tech training experiences.</p>
+  </section>
+
+  <!-- PROGRAMS -->
+  <section class="programs">
+    <div class="program-card">
+      <img src="Resources/Assets/ima/physical.jpg" alt="Physical Training">
+      <h3>🏢 Onsite (Physical) Training</h3>
+      <p>Join us at our tech hub for hands-on mentorship, real-life collaboration, and a vibrant learning community.</p>
+      <button class="btn" onclick="window.location.href='apply.html'">Register Now</button>
+    </div>
+
+    <div class="program-card">
+      <img src="Resources/Assets/ima/online.jpg" alt="Online Training">
+      <h3>💻 Online Training (Zoom/Meet)</h3>
+      <p>Learn from anywhere! Attend live sessions via <strong>Google Meet</strong> or <strong>Zoom</strong> and get full access to digital resources.</p>
+      <button class="btn" onclick="window.location.href='online.html'">Join Online</button>
+    </div>
+
+    <div class="program-card">
+      <img src="Resources/Assets/ima/startup.jpg" alt="Startup Bootcamp">
+      <h3>🚀 Startup Incubation Bootcamp</h3>
+      <p>Turn your ideas into real businesses with guidance from mentors and investors at Prodigy Hub.</p>
+      <button class="btn" onclick="window.location.href='apply.html'">Apply for Bootcamp</button>
+    </div>
+  </section>
+
+  <!-- REGISTRATION FORM -->
+  <section class="register" id="register">
+    <h2>Register for a Program</h2>
+    <p>Fill out the form below to begin your journey with Prodigy Tech Hub.</p>
+
+    <form id="registration-form">
+      <input type="text" name="fullname" placeholder="Full Name" required>
+      <input type="email" name="email" placeholder="Email Address" required>
+      <select name="program" required>
+        <option value="">Select Program</option>
+        <option value="onsite">Onsite (Physical)</option>
+        <option value="online">Online (Zoom/Meet)</option>
+        <option value="bootcamp">Startup Bootcamp</option>
+      </select>
+      <button type="submit" class="btn-submit">Submit Application</button>
+    </form>
+  </section>
+
+  <button class="enroll-btn" onclick="window.location.href='#register'">🎓</button>
+
+  <script>
+    // Animate header on scroll
+    const header = document.querySelector('.header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Form submission popup
+    const form = document.getElementById('registration-form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('✅ Thank you for registering! You will receive a confirmation email shortly.');
+      form.reset();
+    });
+  </script>
+</body>
+</html>
