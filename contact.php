@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     */
 
     // === (2) SEND EMAIL ===
-    $to = "prodigytechhub@gmail.com"; // Your admin email address
+    $to = "aimudofrancis@gmail.com"; // Your admin email address
     $subject = "New Contact Message from $name";
     $body = "
       <h3>New Message from Prodigy Contact Form</h3>
